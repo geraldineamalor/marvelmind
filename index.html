@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -577,7 +577,7 @@ const FALLBACK_MOVIES = [{"title":"Iron Man","cast":["Robert Downey Jr.","Gwynet
 /* ================================================
    TMDB INTEGRATION
    ================================================ */
-const TMDB_KEY  = 'YOUR_TMDB_API_KEY'; // Get a free key at themoviedb.org/settings/api
+const TMDB_KEY  = '8da239c9b54a405594b0bae58a574021'; // themoviedb.org
 const TMDB_BASE = 'https://api.themoviedb.org/3';
 const TMDB_IMG  = 'https://image.tmdb.org/t/p/w500';
 
@@ -646,6 +646,7 @@ async function enrichWithTmdb(movie) {
 
 // Enrich all loaded movies with TMDB — batched to avoid rate limits
 async function fetchFromTmdb() {
+  const BATCH = 5;
   const enriched = [...MOVIES]; // use whatever is currently loaded (Flask or fallback)
 
   for (let i = 0; i < enriched.length; i += BATCH) {
@@ -653,7 +654,6 @@ async function fetchFromTmdb() {
     const results = await Promise.all(batch.map((m, idx) => enrichWithTmdb(enriched[i + idx])));
     results.forEach((r, idx) => { enriched[i + idx] = r; });
     setApiStatus('loading', `Loading posters… ${Math.min(i + BATCH, enriched.length)}/${enriched.length}`);
-    // Small pause between batches to be kind to the API
     if (i + BATCH < enriched.length) await new Promise(r => setTimeout(r, 250));
   }
 

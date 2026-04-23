@@ -17,8 +17,8 @@ marvelmind/
 │   ├── app.py                          # Flask API — main entry point
 │   ├── recommender.py                  # TF-IDF + hybrid recommendation logic
 │   ├── graph_builder.py                # NetworkX cast graph
-│   ├── data_preprocessing.py           # Dataset cleaning pipeline
-│   └── index.html                      # Frontend (MarvelMind UI)
+│   └── data_preprocessing.py           # Dataset cleaning pipeline
+├── index.html                          # Frontend (MarvelMind UI) — served from root
 ├── requirements.txt
 └── README.md
 ```
@@ -149,12 +149,12 @@ You should see:
 ```
 
 ### 5. Serve the frontend
-Open a second terminal:
+Open a second terminal from the **project root** (not inside `src/`):
 ```bash
-cd src
+cd D:\desktop\MarvelMind
 python -m http.server 8080
 ```
-Then open **http://localhost:8080/index.html** in your browser.
+Then open **http://localhost:8080** in your browser — the `index.html` at the root loads automatically.
 
 ---
 
